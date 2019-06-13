@@ -44,7 +44,7 @@ void ChSignBigNbrB(int nbr[], int length)
 	}
 	nbr[ctr] = carry - nbr[ctr];  /* last word does not have most significant bit masked off */
 }
-int BigNbrLen(const long long Nbr[], int nbrLen) {
+int BigNbrLen(const int Nbr[], int nbrLen) {
 	int ix;
 	for (ix = nbrLen; ix > 0; ix--) {
 		if (Nbr[ix - 1] != 0)

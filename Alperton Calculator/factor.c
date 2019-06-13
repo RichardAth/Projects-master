@@ -66,7 +66,7 @@ static int indexM, maxIndexM;
 static int foundByLehman, performLehman;
 static int SmallPrime[670]; /* Primes < 5000 */
 int NextEC;
-static int EC;
+static int EC;    // curve number
 static limb A0[MAX_LEN];
 static limb A02[MAX_LEN];
 static limb A03[MAX_LEN];

@@ -864,7 +864,7 @@ int ZtoLimbs(limb *number, Znum numberZ, int numLen) {
 		/* calculating quotient and remainder separately turns
 		out to be faster */
 		mpz_fdiv_r_2exp(ZT(remainder), ZT(numberZ), BITS_PER_GROUP);
-		number[i].x = MulPrToLong(remainder);
+		number[i].x = (int)MulPrToLong(remainder);
 		mpz_fdiv_q_2exp(ZT(numberZ), ZT(numberZ), BITS_PER_GROUP);
 		//numberZ = quot;
 		i++;
@@ -1293,7 +1293,7 @@ bool ZtoBig(BigInteger &number, Znum numberZ) {
 		/* calculating quotient and remainder separately turns
 		out to be faster */
 		mpz_fdiv_r_2exp(ZT(remainder), ZT(numberZ), BITS_PER_GROUP);
-		number.limbs[i].x = MulPrToLong(remainder);
+		number.limbs[i].x = (int)MulPrToLong(remainder);
 		mpz_fdiv_q_2exp(ZT(numberZ), ZT(numberZ), BITS_PER_GROUP);
 		//numberZ = quot;
 		i++;

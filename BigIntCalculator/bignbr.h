@@ -14,6 +14,8 @@ You should have received a copy of the GNU General Public License
 along with Alpertron Calculators.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <vector>
+#include <iostream>
+#include <strstream>
 #include "mpir.h"
 #include "boost/multiprecision/gmp.hpp" 
 #define ZT(a) a.backend().data()
@@ -306,6 +308,11 @@ public:
 	}
 } ;
 
+void BigInteger2Dec(const BigInteger &BigInt, char *decimal, int groupLength);
+/* output operators declaration */
+std::ostream  &operator<<(std::ostream  &s, const BigInteger &n);
+std::wostream &operator<<(std::wostream &s, const BigInteger &n);
+
 extern BigInteger TestNbrBI;
 extern limb *TestNbr;
 extern limb *MontgomeryMultR2;
@@ -317,7 +324,8 @@ extern int groupLen;
 void FactoringSIQSx(const Znum &NbrToFactor, Znum &Factor);
 void multiply(const limb *factor1, const limb *factor2, limb *result, int len, int *ResultLen);
 void int2dec(char **pOutput, long long nbr);
-void LimbsToDec(char **pOutput, const limb *num, int NumLen);
+void Bin2Dec(const limb *binary, char *decimal, int nbrLimbs, int groupLength);
+
 void ComputeInversePower2(const limb *value, limb *result, limb *tmp);
 void GetMontgomeryParms(int len);
 void GetMontgomeryParms(const Znum &Nval);
@@ -345,7 +353,7 @@ void ComputeInversePower2(/*@in@*/const limb *value, /*@out@*/limb *result, /*@o
 
 void ChSignBigNbr(int nbr[], int length);
 void ChSignBigNbrB(int nbr[], int length);
-int BigNbrLen(const long long Nbr[], int nbrLen);
+int BigNbrLen(const int Nbr[], int nbrLen);
 int BigNbrLen(const limb Nbr[], int nbrLen);
 void AddBigNbr(const int Nbr1[], const int Nbr2[], int Sum[], int nbrLen);
 void SubtractBigNbr(const int Nbr1[], const int Nbr2[], int Diff[], int nbrLen);
@@ -365,6 +373,7 @@ void MultBigNbrModN(Znum Nbr1, Znum Nbr2, Znum Prod, const Znum Mod);
 void MultBigNbrByIntModN(const int Nbr1[], int Nbr2, int Prod[], const int Mod[], int nbrLen);
 void MultBigNbrByIntModN(Znum Nbr1, int Nbr2, Znum Prod, const Znum Mod);
 int intDoubleModPow(int NbrMod, int Expon, int currentPrime);
+
 int ZtoLimbs(limb *number, Znum numberZ, int numLen);
 int ZtoBigNbr(int number[], Znum numberZ);
 void LimbstoZ(const limb *number, Znum &numberZ, const int numLen);

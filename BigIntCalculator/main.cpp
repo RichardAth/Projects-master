@@ -1873,7 +1873,7 @@ static void doTests(void) {
 		}
 	}
 	std::cout << i << " tests completed\n";
-
+	
 	for (Znum i = 1000; i <= 100000000000000000; ) {
 		Znum x1, x2;
 		mpz_nextprime(ZT(x1), ZT(i));  // get next prime
@@ -1994,10 +1994,12 @@ static void doTests3(void) {
 		bBI = b;
 		BigtoZ(a1, aBI);              // copy value to a1 (Znum)
 		assert(a1 == a);              // verify conversion to & from Biginteger
+	
 
 		pBI = aBI + bBI;
 		BigtoZ(p, pBI);
 		assert(p == (a + b));         // verify addition
+		//std::cout << aBI << " + " << bBI << " = " << pBI << '\n';
 
 		pBI = aBI;
 		pBI += bBI;
@@ -2411,7 +2413,7 @@ int main(int argc, char *argv[]) {
 		}
 
 		char banner[] = "Compiled on "  __DATE__ " at " __TIME__ "\n";
-		printf("%s", banner);
+		printf("Version 1.0 %s", banner);
 
 #ifdef __GNUC__
 		printf("gcc version: %d.%d.%d\n", __GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__);

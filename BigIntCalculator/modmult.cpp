@@ -1539,6 +1539,11 @@ static int modInv(int NbrMod, int currentPrime)
 // note: both num and mod are modified (but the value is not changed)
 void ModInvBigNbr(const limb *num, limb *inv, const limb *mod, int nbrLen)
 {
+#ifdef _DEBUG
+	Znum znum, zinv, zmod, zinv2;
+	LimbstoZ(num, znum, nbrLen);
+	LimbstoZ(mod, zmod, nbrLen);
+#endif
 	int len;
 	int k, steps;
 	int a, b, c, d;  // Coefficients used to update variables R, S, U, V.
@@ -1869,16 +1874,12 @@ void ModInvBigNbr(const limb *num, limb *inv, const limb *mod, int nbrLen)
 		modmult(inv, MontgomeryMultR2, inv);
 	}
 #ifdef _DEBUG
-	{
-		Znum znum, zinv, zmod, zinv2;
-		LimbstoZ(num, znum, nbrLen);
-		LimbstoZ(inv, zinv, nbrLen);
-		LimbstoZ(mod, zmod, nbrLen);
+	LimbstoZ(inv, zinv, nbrLen);
+	auto rv = mpz_invert(ZT(zinv2), ZT(znum), ZT(zmod));
+	/*if (rv == 0 || zinv2 != zinv) {
 		std::cout << "Mod Inverse num = " << znum << " inv = " << zinv << " mod = " << zmod << '\n';
-		auto rv = mpz_invert(ZT(zinv2), ZT(znum), ZT(zmod));
-		if (rv == 0 || zinv2 != zinv)
-			std::cout << " should be " << zinv2 << '\n';
-	}
+		std::cout << " should be " << zinv2 << '\n';
+	}*/
 #endif
 }
 
